@@ -1,0 +1,31 @@
+# Logs
+logs
+*.log
+
+# npm cache directory
+.npm
+
+# Optional eslint cache
+.eslintcache
+
+# dotenv environment variables file
+.env
+.env.test
+.env.local
+.env.*.local
+
+# Keys
+*.key
+
+# Stores VSCode versions used for testing VSCode extensions
+.vscode-test
+
+/node_modules
+/dist
+/logs
+
+# Jest coverage
+/coverage
+
+# Requests
+requests.rest
