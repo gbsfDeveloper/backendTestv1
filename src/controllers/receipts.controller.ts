@@ -1,5 +1,4 @@
 import { NextFunction, Request, Response } from 'express';
-import { config } from '../config';
 import NodeCache from 'node-cache'
 import { v4 as uuidv4 } from 'uuid';
 
