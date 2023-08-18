@@ -5,84 +5,95 @@ import { processReceipt, getPointFromReceiptId } from '../../controllers/receipt
 const receiptsRoute = Router();
 const ROUTE = '/receipts';
 
-/**
- * @swagger
- * /app/head-of-display:
- *   post:
- *     tags: [App]
- *     summary: Route to get head of display information of a student
- *     description: This endpoint will return the display header information of the logged student. To consume this endpoint, is required to use a studentAccessToken.
- *     security:
- *       - bearerAuth: []
- *     responses:
- *      '401':
- *        $ref: '#/components/responses/401-unauthorized'
+/** 
+ *  @swagger
+ * /receipts/process:
+ *  post:
+ *    tags: [Receipts]
+ *    summary: Route to process user info and generate id for user
+ *    description: This endpoint will return an id to identify user info.
+ *    requestBody:
+ *      content:
+ *          application/json:
+ *            schema:
+ *              type: object
+ *              properties:
+ *                retailer:
+ *                  type: string
+ *                purchaseDate:
+ *                  type: string
+ *                purchaseTime:
+ *                  type: string
+ *                items:
+ *                  type: array
+ *                  items:
+ *                    type: object
+ *                    properties:
+ *                      shortDescription:
+ *                        type: string
+ *                      price:
+ *                        type: string
+ *                total:
+ *                  type: string
+ *              example:   # Sample object
+ *                retailer: M&M Corner Market
+ *                purchaseDate: 2022-03-20
+ *                purchaseTime: 14:33
+ *                items: [
+ *                  {
+ *                    shortDescription: Gatorade,
+ *                    price: 2.25
+ *                  },{
+ *                    shortDescription: Gatorade,
+ *                    price: 2.25
+ *                  },{
+ *                    shortDescription: Gatorade,
+ *                    price: 2.25
+ *                  },{
+ *                    shortDescription: Gatorade,
+ *                    price": 2.25
+ *                  }
+ *                ]
+ *                total: 9.00
+ *    responses:
  *      '200':
- *        description: An JSON Web Token (JWT). This JWT has to be stored somewhere in our client. This JWT token allows the user to make authorized-only requests.
+ *        description: 
  *        content:
  *          application/json:
  *            schema:
  *              type: object
  *              properties:
- *                avatar:
+ *                id:
  *                  type: string
- *                  example: ""
- *                studentname:
- *                  type: string
- *                  example: "test2016"
- *                points:
- *                  type: number
- *                  example: 1899
- *                streak:
- *                  type: array
- *                  items:
- *                   type: boolean
- *                  example: [true, false, true, true, false]
- *                ranking:
- *                  type: number
- *                  example: 2
+ *                  example: "" 
  */
-
 receiptsRoute.post(`${ROUTE}/process`, processReceipt);
 
-/**
- * @swagger
- * /app/head-of-display:
- *   get:
- *     tags: [App]
- *     summary: Route to get head of display information of a student
- *     description: This endpoint will return the display header information of the logged student. To consume this endpoint, is required to use a studentAccessToken.
- *     security:
- *       - bearerAuth: []
- *     responses:
- *      '401':
- *        $ref: '#/components/responses/401-unauthorized'
+/** 
+ *  @swagger
+ * /receipts/{id}/points:
+ *  get:
+ *    tags: [Receipts]
+ *    summary: Route to process user id to get total points earned
+ *    description: This endpoint will return an total points for user.
+ *    parameters:
+ *      - in: path
+ *        name: id
+ *        schema:
+ *          type: string
+ *        required: true
+ *    responses:
  *      '200':
- *        description: An JSON Web Token (JWT). This JWT has to be stored somewhere in our client. This JWT token allows the user to make authorized-only requests.
+ *        description: 
  *        content:
  *          application/json:
  *            schema:
  *              type: object
  *              properties:
- *                avatar:
- *                  type: string
- *                  example: ""
- *                studentname:
- *                  type: string
- *                  example: "test2016"
  *                points:
- *                  type: number
- *                  example: 1899
- *                streak:
- *                  type: array
- *                  items:
- *                   type: boolean
- *                  example: [true, false, true, true, false]
- *                ranking:
- *                  type: number
- *                  example: 2
+ *                  type: integer 
+ *                  example: 0
  */
-
 receiptsRoute.get(`${ROUTE}/:id/points`, getPointFromReceiptId);
 
 export default receiptsRoute;

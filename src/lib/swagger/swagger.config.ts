@@ -8,7 +8,7 @@ export const swaggerDocsOptions: swaggerJsDoc.Options = {
     info: {
       title: 'Backend Test',
       version: config.APP_VERSION,
-      description: `<h3 style="margin-bottom:0">This is a REST API developed by the Wizeline Backend Team</h3>`,
+      description: `<h3 style="margin-bottom:0">REST API developed by Gelacio Ben Yair SF</h3>`,
     },
     servers: [
       {

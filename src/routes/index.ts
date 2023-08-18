@@ -5,11 +5,8 @@ import { ignoreFavicon } from '../middlewares/ignoreFavicon';
 import { notFoundHandler } from '../middlewares/notFoundHandler';
 import apiDocsRoute from './api-docs';
 import receiptsRoute from './receipts/receiptsRoute';
-import appRoute from './app/appRoute';
 
 const router = Router();
-
-router.use(appRoute);
 
 router.use(receiptsRoute);
 
