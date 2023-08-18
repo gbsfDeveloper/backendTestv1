@@ -12,10 +12,6 @@ You need to have installed docker on your PC.  :+1:
 
 2. In the superior folder of the project downloaded in the step before run the follow
 
-`git clone https://github.com/gbsfDeveloper/backendTestv1.git`
-
-3. Next run follow
-
 `docker build .\<gitProjectDownloadName>\ -t <someNameYouLike>:latest`
 
 example:
