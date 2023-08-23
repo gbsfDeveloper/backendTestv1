@@ -71,6 +71,10 @@ const getInTime = (date : string, purchaseTime : string) => {
   return (parseTime > minorTime && parseTime < mayorTime) ;
 }
 
+const hasDuplicates = (items: String[]) => {
+  return (new Set(items)).size !== items.length;
+}
+
 export const getPointFromReceiptId = async (
   req: Request,
   res: Response,
@@ -130,6 +134,13 @@ export const getPointFromReceiptId = async (
     // 10 points if the time of purchase is after 2:00pm and before 4:00pm
     const isInTime = getInTime(date, purchaseTime);
     points += ( isInTime ) ? POINTS_IF_IS_IN_TIME : NO_GAIN_POINTS;
+    
+    // if no unique values no get points, if all array is unique get 10 points
+    var valueArr = items.map(function(item){ return item.shortDescription });
+    var isDuplicate = valueArr.some(function(item, idx){
+        return valueArr.indexOf(item) != idx 
+    });
+    points += !isDuplicate ? (items.length * 5) + 10 : NO_GAIN_POINTS; 
 
     res.status(200).json({ points });
   } catch (error) {
